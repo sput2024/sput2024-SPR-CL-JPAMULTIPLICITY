@@ -1,5 +1,5 @@
 package Application.Service;
-
+import Application.Service.ClassroomService;
 import Application.Model.Classroom;
 import Application.Model.Student;
 import Application.Repository.ClassroomRepository;
@@ -58,8 +58,15 @@ public class StudentService {
      * @param classroom a persisted, existing classroom passed into this method
      */
     public void assignClassroomToStudent(long studentId, Classroom classroom){
+        Optional<Student> student1 = studentRepository.findById(studentId);
+        if(student1.isPresent()){
+            Student student2 = student1.get();
+        //    long c1 = classroom.getId();
+            student2.setClassroom(classroom);
+            studentRepository.save(student2);
 
     }
+}
 
     /**
      * TODO: Provided the Id of an already existing student entity, return its assigned classroom by retrieving
@@ -69,7 +76,14 @@ public class StudentService {
      * @return the Classroom of the student
      */
     public Classroom getClassroomOfStudent(long studentId){
+        Optional<Student> student1 = studentRepository.findById(studentId);
+        if(student1.isPresent()){
+            Student student = student1.get();
+            Classroom classroom = student.getClassroom();
+            return classroom;
+        }
         return null;
+        
     }
 
     /**
@@ -79,6 +93,12 @@ public class StudentService {
      * @param studentId Id of a persisted, existing student entity
      */
     public void unassignClassroomOfStudent(long studentId){
+        Optional<Student> student1 = studentRepository.findById(studentId);
+        if(student1.isPresent()){
+            Student student2 = student1.get();
+            student2.setClassroom(null);
+            studentRepository.save(student2);
 
     }
+}
 }

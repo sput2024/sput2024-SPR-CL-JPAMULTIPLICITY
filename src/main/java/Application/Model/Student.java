@@ -3,6 +3,7 @@ package Application.Model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 /**
  * This JPA Entity has been related with the Student entity via a @ManyToOne annotation. The actual table
  * this entity will be related to will contain a foreign key in the Student table that relates it to the Classroom
@@ -16,10 +17,10 @@ import javax.persistence.*;
  * carefully for maximal efficiency.
  */
 @Entity
-@Data
-@AllArgsConstructor
+@AllArgsConstructor()
 @NoArgsConstructor
 @EqualsAndHashCode
+@Data
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
